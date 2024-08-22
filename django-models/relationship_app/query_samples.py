@@ -5,7 +5,7 @@ from .models import Book, Library, Librarian
 Book.objects.get(author='Joe different')
 
 # List all books in a library.
-library = Library.objects.all()
-library.books
+library= Library.objects.get(name='Saint Lorence')
+library.books.all()
 # Retrieve the librarian for a library.
 Librarian.objects.get(library= 'Saint Lorence')
