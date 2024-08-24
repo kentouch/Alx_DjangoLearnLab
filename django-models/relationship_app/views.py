@@ -7,7 +7,7 @@ from .models import Library, Author, Librarian, Book
 # Create your views here.
 
 #Implement Function-based View
-def book_list(request):
+def list_books(request):
     # retrieve all the books 
     books = Book.objects.all()
     context = {'book_list': books}
