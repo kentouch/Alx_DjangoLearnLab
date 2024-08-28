@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import DetailView
-from .models import Library, Author, Librarian, Book
+from .models import Library, Author, Librarian, Book, UserProfile
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib import messages
@@ -8,6 +8,26 @@ from django.contrib import messages
 
 # Create your views here.
 
+# admin view
+def admin_view(request):
+    user = UserProfile.objects.all()
+    if user.role == 'Admin':
+        return render(request, 'admin.html', {})
+    
+
+# librarian view
+def admin_view(request):
+    user = UserProfile.objects.all()
+    if user.role == 'librarian':
+        return render(request, 'librarian.html', {})
+    
+# Member view
+def admin_view(request):
+    user = UserProfile.objects.all()
+    if user.role == 'Member':
+        return render(request, 'member.html', {})
+
+# register view
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm
