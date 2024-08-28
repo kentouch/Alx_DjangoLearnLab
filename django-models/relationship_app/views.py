@@ -21,20 +21,20 @@ def register(request):
             return messages.error('registration failed, try again')
     else:
         form = UserCreationForm
-        return render(request, 'registration/signup.html', {'form': form})
+        return render(request, 'register.html', {'form': form})
 
 
 #Implement Function-based View
-def list_books(request):
+def home(request):
     # retrieve all the books 
     books = Book.objects.all()
     context = {'book_list': books}
-    return render(request, 'relationship_app/home.html', context)
+    return render(request, 'home.html', context)
 
 #Implement Class-based View:
 class LibraryDetailViews(DetailView):
     model = Library
-    template_name = 'relationship_app/library_detail.html'
+    template_name = 'library_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
