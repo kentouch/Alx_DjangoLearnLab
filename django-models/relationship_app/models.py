@@ -13,9 +13,9 @@ from django.db.models.signals import post_save
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     ROLE_CHOICES = [
-    ('admin', 'ADMIN'),
+    ('Admin', 'ADMIN'),
     ('librarian', 'LIBRARIAN'),
-    ('member','MEMBER')
+    ('Member','MEMBER')
 ]
     role = models.CharField(max_length=200, choices=ROLE_CHOICES, default='admin')
 
