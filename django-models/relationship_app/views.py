@@ -1,7 +1,5 @@
-from typing import Any
-from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
-from django.views.generic import DetailView, CreateView
+from django.views.generic import DetailView
 from .models import Library, Author, Librarian, Book
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
