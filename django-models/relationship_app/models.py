@@ -1,6 +1,24 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 # Create your models here.
+
+
+# first step: Extend the User Model with a UserProfile
+
+@receiver(post_save, sender=User)
+# user profile model
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    ROLE_CHOICES = [
+    ('admin', 'ADMIN'),
+    ('librarian', 'LIBRARIAN'),
+    ('member','MEMBER')
+]
+    role = models.CharField(max_length=200, choices=ROLE_CHOICES, default='admin')
+
 
 # Author model
 class Author(models.Model):
