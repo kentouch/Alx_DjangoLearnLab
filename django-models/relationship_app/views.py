@@ -5,6 +5,7 @@ from django.views.generic import DetailView, CreateView
 from .models import Library, Author, Librarian, Book
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
+from django.contrib.auth import login
 
 # Create your views here.
 
