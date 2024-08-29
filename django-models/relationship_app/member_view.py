@@ -1,18 +1,9 @@
-from django.shortcuts import render, redirect
-from django.views.generic import DetailView
-from .models import Library, Author, Librarian, Book, UserProfile
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login
-from django.contrib import messages
+# member_view.py
+
+from django.http import HttpResponse
 from django.contrib.auth.decorators import user_passes_test
+from .utils import is_member  # Assuming utils.py is in the same directory
 
-
-# function test for admin
-def is_member(user):
-    return hasattr(user, 'userprofile') and user.userprofile.role == 'Member'
-
-
-# Member view
 @user_passes_test(is_member)
-def member_view(request):
-    return render(request, 'member.html', {})
+def member_only_view(request):
+    return HttpResponse("This view is for Members only.")
