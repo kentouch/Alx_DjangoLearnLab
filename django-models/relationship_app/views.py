@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import user_passes_test
 from .test_func import is_admin, is_member, is_librarian  # Assuming utils.py is in the same directory
 from .models import Library, Book, Librarian
-from django.views.generic.detail import CreateView, DetailView
+from django.views.generic.detail import DetailView
 
 # create your views here
 
