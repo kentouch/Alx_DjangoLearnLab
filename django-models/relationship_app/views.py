@@ -11,7 +11,8 @@ from django.views.generic import CreateView, DetailView
 
 # list_of_books views
 def list_books(request):
-    return render(request, 'relationship_app/list_books.html', {})
+    books = Book.objects.all()
+    return render(request, 'relationship_app/list_books.html', {'list_books':books})
 
 
 #class based view
