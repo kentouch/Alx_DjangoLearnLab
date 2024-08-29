@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import user_passes_test
 from .test_func import is_admin, is_member, is_librarian  # Assuming utils.py is in the same directory
-from .models import Book, Librarian, Library
+from .models import Library, Book, Librarian
 from django.views.generic import CreateView, DetailView
 
 # create your views here
