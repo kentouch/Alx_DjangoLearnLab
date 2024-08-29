@@ -4,11 +4,28 @@ from .models import Library, Author, Librarian, Book, UserProfile
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib import messages
+from django.contrib.auth.decorators import user_passes_test
 
 
 # Create your views here.
 
+# function test for admin
+def is_admin(user):
+    return hasattr(user, 'userprofile') and user.userprofile.role == 'Admin'
+
+
+# function test for admin
+def is_librarian(user):
+    return hasattr(user, 'userprofile') and user.userprofile.role == 'Librarian'
+
+
+# function test for admin
+def is_member(user):
+    return hasattr(user, 'userprofile') and user.userprofile.role == 'Member'
+
+
 # admin view
+@user_passes_test(is_admin)
 def admin_view(request):
     user = UserProfile.objects.all()
     if user.role == 'Admin':
@@ -16,16 +33,14 @@ def admin_view(request):
     
 
 # librarian view
-def admin_view(request):
-    user = UserProfile.objects.all()
-    if user.role == 'librarian':
-        return render(request, 'librarian.html', {})
+@user_passes_test(is_librarian)
+def librarian_view(request):
+    return render(request, 'librarian.html', {})
     
 # Member view
-def admin_view(request):
-    user = UserProfile.objects.all()
-    if user.role == 'Member':
-        return render(request, 'member.html', {})
+@user_passes_test(is_member)
+def member_view(request):
+    return render(request, 'member.html', {})
 
 # register view
 def register(request):
