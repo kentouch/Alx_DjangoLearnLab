@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
-from django.contrib.auth.decorators import user_passes_test, permission_required
+from django.contrib.auth.decorators import permission_required, user_passes_test
 from .test_func import is_admin, is_member, is_librarian  # Assuming utils.py is in the same directory
 from .models import Library, Book, Librarian
 from django.views.generic.detail import DetailView
@@ -17,8 +17,8 @@ def list_books(request):
     return render(request, 'relationship_app/home.html', {'list_books':books})
 
 # edit book view
-@permission_required('relationship_app.can_edit_book')
-def edit_book(request):
+@permission_required('relationship_app.can_change_book')
+def change_book(request):
     return render(request, 'relationship_app/edit_book.html')   
 
 # add book
