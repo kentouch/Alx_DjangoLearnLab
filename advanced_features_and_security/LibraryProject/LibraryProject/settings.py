@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@x5zoj7p@@fyr25_55_ejhb-6o^r7(a+3_fkp&u6a#i9!+lky^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -73,6 +73,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'LibraryProject.wsgi.application'
 
 
+# CSRF_COOKIE_SECURE and SESSION_COOKIE_SECURE are set to True 
+# to enforce that cookies are sent over HTTPS only.
+CSRF_COOKIE_SECURE = True
+
+SESSION_COOKIE_SECURE= True
+
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
@@ -82,6 +88,15 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# This setting controls the XSS (Cross-Site Scripting) protection filter in modern browsers.
+SECURE_BROWSER_XSS_FILTER = True
+
+# This setting helps prevent clickjacking attacks by controlling whether your site can be displayed inside a frame (<iframe>) on another website.
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+# This setting tells browsers not to guess the content type of files served by your website.
+SECURE_CONTENT_TYPE_NOSNIFF = True
 
 
 # Password validation
