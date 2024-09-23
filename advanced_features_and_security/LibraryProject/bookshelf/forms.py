@@ -1,5 +1,6 @@
 from django import forms
 
+# this is the form class for an example form
 class ExampleForm(forms.Form):
     name = forms.CharField(max_length=100, label='Your Name')
     email = forms.EmailField(label='Your Email')

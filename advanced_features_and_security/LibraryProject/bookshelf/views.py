@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .models import Book
 from django.contrib.auth.decorators import permission_required
+from .forms import ExampleForm
+from django.contrib import messages
 
 # create views here
 
@@ -10,4 +12,15 @@ from django.contrib.auth.decorators import permission_required
 def book_list(request):
     books = Book.objects.all()
     return render(request, 'bookshelf/home.html', {'list_books':books})
+
+# Let's use the exampleform for validation
+def example_form(request):
+    if request.method == 'POST':
+        form = ExampleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return messages.success(request, 'Form submitted successfully!')
+    else:
+        form = ExampleForm()
+    return render(request, 'bookshelf/form_example.html', {'form':form})
 
