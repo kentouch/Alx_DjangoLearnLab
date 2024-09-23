@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@x5zoj7p@@fyr25_55_ejhb-6o^r7(a+3_fkp&u6a#i9!+lky^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -72,6 +72,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'LibraryProject.wsgi.application'
 
+# SECURE_SSL_REDIRECT:
+# Set to True to redirect all non-HTTPS requests to HTTPS.
+
+SECURE_SSL_REDIRECT = True
+
+# SECURE_HSTS_SECONDS: Set an appropriate value 
+# (e.g., 31536000 for one year) to instruct browsers to only 
+# access the site via HTTPS for the specified time.
+
+SECURE_HSTS_SECONDS = 31536000
+
+# SECURE_HSTS_INCLUDE_SUBDOMAINS and SECURE_HSTS_PRELOAD: Set to True
+# to include all subdomains in the HSTS policy and to allow preloading.
+
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+SECURE_HSTS_PRELOAD = True
 
 # CSRF_COOKIE_SECURE and SESSION_COOKIE_SECURE are set to True 
 # to enforce that cookies are sent over HTTPS only.
@@ -93,7 +110,7 @@ DATABASES = {
 SECURE_BROWSER_XSS_FILTER = True
 
 # This setting helps prevent clickjacking attacks by controlling whether your site can be displayed inside a frame (<iframe>) on another website.
-X_FRAME_OPTIONS = 'SAMEORIGIN'
+X_FRAME_OPTIONS = 'DENY'
 
 # This setting tells browsers not to guess the content type of files served by your website.
 SECURE_CONTENT_TYPE_NOSNIFF = True
