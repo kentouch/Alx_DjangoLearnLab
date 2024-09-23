@@ -115,6 +115,13 @@ X_FRAME_OPTIONS = 'DENY'
 # This setting tells browsers not to guess the content type of files served by your website.
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
+# Ensure that your deployment environment is configured 
+# to support HTTPS by setting up SSL/TLS certificates. 
+# This might involve updating your web server configuration 
+# (e.g., Apache or Nginx) to include SSL directives and certificate files.
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
