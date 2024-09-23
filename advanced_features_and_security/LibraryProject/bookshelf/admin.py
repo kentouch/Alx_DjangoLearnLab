@@ -9,8 +9,7 @@ class BookAdmin(admin.ModelAdmin):
 
 # register the custom user model with the admin
 class CustomUserAdmin(UserAdmin):
-    list_display = ('username', 'role')
-    search_fields = ('username', 'role')
+    list_display = ('username', 'date_of_birth', 'profile_photo')
 
 
 admin.site.register(Book, BookAdmin)
