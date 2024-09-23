@@ -19,18 +19,18 @@ def list_books(request):
 
 # edit book view
 # permission required using permission decorator that checks if user has permission
-@permission_required('relationship_app.can_change_book')
+@permission_required('relationship_app.can_change_book', raise_exception=True)
 def change_book(request):
     if request.user.has_perm('relationship_app.can_change_book'):
         return render(request, 'relationship_app/edit_book.html')   
 
 # add book
-@permission_required('relationship_app.can_add_book')
+@permission_required('relationship_app.can_add_book', raise_exception=True)
 def add_book(request):
     return render(request, 'relationship_app/add_book.html')
 
 # delete book
-@permission_required('relationship_app.can_delete_book')
+@permission_required('relationship_app.can_delete_book', raise_exception=True)
 def delete_book(request):
     return render(request, 'relationship_app/delete_book.html')
 
