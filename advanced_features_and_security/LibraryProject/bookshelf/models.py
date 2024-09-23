@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 
 # Create your models here.
 
@@ -8,7 +8,9 @@ class CustomUser(AbstractUser):
     date_of_birth = models.DateField(null=True, blank=True)
     profile_photo = models.ImageField()
 
-    # Create user with date of birth and profile photo
+
+class CustomUserManager(BaseUserManager):
+# Create user with date of birth and profile photo
     def create_user(date_birth, profile_photo, *args, **kwargs):
         # Call create_user method from AbstractUser
         user = CustomUser.objects.create_user(*args, **kwargs)
@@ -17,7 +19,7 @@ class CustomUser(AbstractUser):
         user.profile_photo = profile_photo
         user.save()
         return user
-    # Create superuser with date of birth and profile photo
+        # Create superuser with date of birth and profile photo
     def create_superuser(date_birth, profile_photo, *args, **kwargs):
         # Call create_superuser method from AbstractUser
         user = CustomUser.objects.create_superuser(*args, **kwargs)

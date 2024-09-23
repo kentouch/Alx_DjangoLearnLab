@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import permission_required, user_passes_test
 from .test_func import is_admin, is_member, is_librarian  # Assuming utils.py is in the same directory
 from .models import Library, Book, Librarian
 from django.views.generic.detail import DetailView
+from bookshelf.models import CustomUser
 
 # create your views here
 
@@ -17,9 +18,11 @@ def list_books(request):
     return render(request, 'relationship_app/home.html', {'list_books':books})
 
 # edit book view
+# permission required using permission decorator that checks if user has permission
 @permission_required('relationship_app.can_change_book')
 def change_book(request):
-    return render(request, 'relationship_app/edit_book.html')   
+    if request.user.has_perm('relationship_app.can_change_book'):
+        return render(request, 'relationship_app/edit_book.html')   
 
 # add book
 @permission_required('relationship_app.can_add_book')
