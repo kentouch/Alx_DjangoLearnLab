@@ -20,9 +20,12 @@ class BookSerializer(serializers.ModelSerializer):
 # this is used for the POST and PUT requests
 
 class AuthorSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(max_length=100)
+    book = BookSerializer(many=True, read_only=True)
     class Meta:
         model = Author
         fields = '__all__'
+
 
 # Describe how the relationship 
 # between Author and Book is handled in your serializers.
