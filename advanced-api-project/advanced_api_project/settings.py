@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'api'
+    'api',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -52,6 +52,15 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'advanced_api_project.urls'
+
+REST_FRAMEWORK = {
+    # DEFAULT PERMISSIONS CLASSES
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        'rest_framework.permissions.IsAdminUser',
+        'rest_framework.permissions.IsAuthenticated'
+    ],
+}
 
 TEMPLATES = [
     {
