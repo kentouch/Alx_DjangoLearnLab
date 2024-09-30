@@ -10,24 +10,21 @@ class BookListView(generics.ListCreateAPIView):
     serializer_class = BookSerializer
 
 # Construct a view for creating books through the API
-class BookCreateApiView(generics.CreateAPIView):
+# Implement a set of generic views for the Book model to handle CRUD operations. This includes:
+# A ListView for retrieving all books.
+class BookDetailView(generics.DetailApiView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-
-    def perform_create(self, serializer):
-        serializer.save()
-
-# Construct a view for updating books through the API
-"""class BookUpdateApiView(generics.UpdateAPIView):
+# A DetailView for retrieving a single book by ID.
+class BookCreateView(generics.CreateApiView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-
-    def perform_update(self, serializer):
-        serializer.save()"""
-
-# Construct a view for detailing books through the API
-
-class BookDetailApiView(generics.RetrieveUpdateDestroyAPIView):
+# A CreateView for adding a new book.
+class BookUpdateView(generics.UpdateApiView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-
+# An UpdateView for modifying an existing book.
+class BookDeleteView(generics.DeleteApiView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+# A DeleteView for removing a book.
