@@ -11,7 +11,7 @@ class BookSerializer(serializers.ModelSerializer):
         fields = '__all__'
     
     def validate_publication_year(self, value):
-        if value < 2024:
+        if value > 2024:
             raise serializers.ValidationError('Publication year must be less than 2024')
         return value
 
