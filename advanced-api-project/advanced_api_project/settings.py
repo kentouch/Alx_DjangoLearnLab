@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api',
-    'rest_framework'
+    'rest_framework',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +54,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'advanced_api_project.urls'
 
+# REST FRAMEWORK default permissions classes
 REST_FRAMEWORK = {
     # DEFAULT PERMISSIONS CLASSES
     'DEFAULT_PERMISSION_CLASSES': [
@@ -61,6 +63,24 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated'
     ],
 }
+
+# Rest Framework default testing classes
+REST_FRAMEWORK = {
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
+}
+
+# REST FRAMEWORK default filter classes
+REST_FRAMEWORK = {
+    # DEFAULT FILTER CLASSES
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.OrderingFilter',
+        'rest_framework.filters.SearchFilter',
+    ],
+}
+
+
+
 
 TEMPLATES = [
     {
