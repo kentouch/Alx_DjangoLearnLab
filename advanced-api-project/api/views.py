@@ -29,7 +29,7 @@ class BookDetailView(generics.RetrieveAPIView):
 # A DetailView for retrieving a single book by ID.
 class BookCreateView(generics.CreateAPIView):
     # permissions = [IsAuthenticatedOrReadOnly, IsAdminUser]
-    permission_classes = [IsAuthenticated]
+    permissions = [IsAuthenticated]
 
     queryset = Book.objects.all()
     serializer_class = BookSerializer
