@@ -11,6 +11,7 @@ class BookAPITest(test.APITestCase):
     def setUp(self):
         # let's first create a user and authenticate him
         self.user = User.objects.create_user(username='testuser', password='testpassword')
+        # let's Configure a separate test database to avoid impacting your production or development data
         self.client.login(user=self.user)
         
         # create an author instance before running the book tests
