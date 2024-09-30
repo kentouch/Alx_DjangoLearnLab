@@ -1,11 +1,11 @@
 from typing import Any
 from django.test import TestCase
-from rest_framework.test import APITestCase
+from rest_framework import status, test
 from django.urls import reverse
 from .models import Book, Author
 from django.contrib.auth.models import User
 
-class BookAPITest(APITestCase):
+class BookAPITest(test.APITestCase):
     
     # Let's write a Set up function for the tests
     def setUp(self):
@@ -48,7 +48,7 @@ class BookAPITest(APITestCase):
         response = self.client.get(url)
         
         # Check that the request succeeded
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         
         # Check the returned data
         self.assertEqual(response.data['title'], "Book 1")
@@ -69,7 +69,7 @@ class BookAPITest(APITestCase):
         response = self.client.post(url, data, format='json')
 
     # Check that the request succeeded
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         # Check the returned data
         self.assertEqual(response.data['title'], "New Book")
         self.assertEqual(response.data['author'], self.author.id)
@@ -90,7 +90,7 @@ class BookAPITest(APITestCase):
         response = self.client.put(url, data, format='json')
         
         # Check that the request succeeded
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         # Check the returned data
         self.assertEqual(response.data['title'], "Updated Book 1")
         self.assertEqual(response.data['author'], self.author.id)
@@ -106,7 +106,7 @@ class BookAPITest(APITestCase):
         response = self.client.delete(url)
         
         # Check that the request succeeded
-        self.assertEqual(response.status_code, 204)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
         # check that the book is deleted
         self.assertEqual(Book.objects.count(), 1)
