@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 
 class BookAPITest(APITestCase):
     
+    # Let's write a Set up function for the tests
     def setUp(self):
         # let's first create a user and authenticate him
         self.user = User.objects.create_user(username='testuser', password='testpassword')
