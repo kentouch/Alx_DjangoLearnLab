@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.forms import RegisterForm
+# let's import auhtentication classes
 
 # Create your views here.
 # Utilize Django’s built-in authentication views and forms to handle user login and logout. 
@@ -24,6 +26,14 @@ class HomeView:
         return render(request, 'blog/register.html')
     
     # profile view
+    # Develop a view that allows authenticated users to view and edit their profile details.
+    # This view should handle POST requests to update user information.
+    # It should also handle GET requests to display the user profile.
     def profile(request):
+        if request.method == 'POST':
+            form = RegisterForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return render(request, 'blog/profile.html')
         return render(request, 'blog/profile.html')
     
