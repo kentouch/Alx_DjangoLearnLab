@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- register form -->
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        <h1>Register</h1>
+        {% if error %}
+        <p>{{ error }}</p>
+        {% else %}
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email">
+        <label for="password1">Password:</label>
+        <input type="password" name="password1" id="password1">
+        <label for="password2">Confirm Password:</label>
+        <input type="password" name="password2" id="password2">
+        <input type="submit" value="Register">
+        {% endif %}
+    </form>
+</body>
+</html>
