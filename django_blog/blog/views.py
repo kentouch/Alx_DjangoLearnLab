@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Post
 from .forms import RegisterForm
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 # let's import auhtentication classes
@@ -52,6 +53,7 @@ class PostDetailView(DetailView):
     template_name = 'blog/post_detail.html' 
 
 # Create View to create a new blog post.
+@login_required
 class PostCreateView(LoginRequiredMixin, CreateView):
     login_url = '/login/'
     model = Post
