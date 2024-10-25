@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from django.forms import RegisterForm
+from .models import Post
+from .forms import RegisterForm
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 # let's import auhtentication classes
 
 # Create your views here.
@@ -18,7 +20,7 @@ class HomeView:
         return render(request, 'blog/login.html')
     
     # logout view
-    def login(request):
+    def logout(request):
         return render(request, 'blog/logout.html')
     
     # register view
@@ -37,3 +39,31 @@ class HomeView:
                 return render(request, 'blog/profile.html')
         return render(request, 'blog/profile.html')
     
+# use class based views to handle CRUD operations
+# ListView to display all blog posts.
+class PostListView(ListView):
+    model = Post
+    template_name = 'blog/index.html'
+
+# Detail View to display a specific blog post.
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'blog/post_detail.html' 
+
+# Create View to create a new blog post.
+class PostCreateView(CreateView):
+    model = Post
+    template_name = 'blog/post_form.html'
+    fields = ['title', 'content']
+
+# Update View to update an existing blog post.
+class PostUpdateView(UpdateView):
+    model = Post
+    template_name = 'blog/post_form.html'
+    fields = ['title', 'content']
+
+# Delete View to delete an existing blog post.
+class PostDeleteView(DeleteView):
+    model = Post
+    template_name = 'blog/post_confirm_delete.html'
+    success_url = '/'

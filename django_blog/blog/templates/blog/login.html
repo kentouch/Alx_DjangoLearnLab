@@ -1,25 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <!-- login form-->
-    <form action="{% url 'login' %}" method="post">
-        {% csrf_token %}
-        <h1>Login</h1>
-        <!--should provide feedback for authentication errors or confirmations.-->
-        {% if error %}
-        <p>{{ error }}</p>
-        {% else %}
-        <label for="username">Username:</label>
-        <input type="text" name="username" id="username">
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password">
-        <input type="submit" value="Login">
-        {% endif %}
-    </form>
-</body>
-</html>
+{% extend 'blog/base.html' %}
+{% load static %}
+<!-- login form-->
+<form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    <h1>Login</h1>
+    <!--should provide feedback for authentication errors or confirmations.-->
+    {% if error %}
+    <p>{{ error }}</p>
+    {% else %}
+    <label for="username">Username:</label>
+    <input type="text" name="username" id="username">
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password">
+    <input type="submit" value="Login">
+    {% endif %}
+</form>
+
+{% block content %}
