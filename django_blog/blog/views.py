@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Post
 from .forms import RegisterForm
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 # let's import auhtentication classes
 
@@ -51,19 +52,30 @@ class PostDetailView(DetailView):
     template_name = 'blog/post_detail.html' 
 
 # Create View to create a new blog post.
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
+    login_url = '/login/'
     model = Post
     template_name = 'blog/post_form.html'
     fields = ['title', 'content']
 
 # Update View to update an existing blog post.
-class PostUpdateView(UpdateView):
+class PostUpdateView(UserPassesTestMixin, UpdateView):
     model = Post
     template_name = 'blog/post_form.html'
     fields = ['title', 'content']
 
+    # test if the user is the author
+    def test_func(self):
+        obj = self.get_object()
+        return obj.author == self.request.user
+
 # Delete View to delete an existing blog post.
-class PostDeleteView(DeleteView):
+class PostDeleteView(UserPassesTestMixin, DeleteView):
     model = Post
     template_name = 'blog/post_confirm_delete.html'
     success_url = '/'
+
+    # test if the user is the author
+    def test_func(self):
+        obj = self.get_object()
+        return obj.author == self.request.user
