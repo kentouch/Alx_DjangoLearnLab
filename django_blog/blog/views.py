@@ -50,7 +50,7 @@ class PostListView(ListView):
     model = Post
     template_name = 'blog/index.html'
     def get_queryset(self):
-        return Post.objects.filter(Q(title__icontains = self.title) | Q(content__icontains = self.content) | Q(tags__name__icontains = self.tags))
+        return Post.objects.filter(Q(title__icontains = self.title) | Q(content__icontains = self.content) | Q(tags__icontains = self.tags))
 
 # Detail View to display a specific blog post.
 class PostDetailView(DetailView):
@@ -102,3 +102,10 @@ class CommentUpdateView(UpdateView):
 class CommentDeleteView(DeleteView):
     model = Comment
     template_name = 'blog/post_detail.html'
+
+# Taglist view for tagged posts
+class PostByTagListView(ListView):
+    model = Post
+    template_name = 'blog/post_tagged.html'
+    def get_queryset(self):
+        return Post.objects.filter(tags__name__icontains = self.tag)
