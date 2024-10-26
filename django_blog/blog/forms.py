@@ -3,7 +3,8 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms  
 from django.contrib.auth.models import User
-from .models import Post, Tag
+from .models import Post
+from taggit.forms import TagWidget
 from .models import Comment
 
 class RegisterForm(UserCreationForm):
@@ -13,15 +14,16 @@ class RegisterForm(UserCreationForm):
 
 # Develop a form for the Post model using Django’s ModelForm and implementing tag field
 class PostForm(forms.ModelForm):
-    tags = forms.CharField(required=False)
-    # Implement a condition for creating new tags that do not already exist in the database
-    def tag(self):
-        tags = forms.CharField(required=False)
-        if tags not in Tag.objects.all():
-            Tag.objects.create(name=tags)
+    # Update the PostForm to include a field for adding or editing tags associated with the post.
+    # Consider using a third-party package like django-taggit for easier tag management.
+    
     class Meta:
         model = Post
         fields = ['title', 'content', 'tags']
+        widgets = {
+
+            'tags' : TagWidget()
+        }
     
 
     # Ensure the form validates data properly and includes fields for title, content, 
