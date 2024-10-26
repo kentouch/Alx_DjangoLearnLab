@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Post
+from .models import Post, Comment
 from .forms import RegisterForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -81,3 +81,19 @@ class PostDeleteView(UserPassesTestMixin, DeleteView):
     def test_func(self):
         obj = self.get_object()
         return obj.author == self.request.user
+    
+## Implement CRUD for the comment model
+# Create View to create a new comment.
+class CommentCreateView(CreateView):
+    model = Comment
+    template_name = 'blog/post_detail.html'
+
+# Update view for edit a comment
+class CommentUpdateView(UpdateView):
+    model = Comment
+    template_name = 'blog/post_detail.html'
+
+# Delete view for deleting an existing comment
+class CommentDeleteView(DeleteView):
+    model = Comment
+    template_name = 'blog/post_detail.html'
