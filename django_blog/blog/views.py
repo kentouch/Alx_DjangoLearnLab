@@ -1,6 +1,9 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render
 from .models import Post, Comment
 from .forms import RegisterForm
+from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -46,6 +49,8 @@ class HomeView:
 class PostListView(ListView):
     model = Post
     template_name = 'blog/index.html'
+    def get_queryset(self):
+        return Post.objects.filter(Q(title = self.title) | Q(content = self.content) | Q(tags = self.tags))
 
 # Detail View to display a specific blog post.
 class PostDetailView(DetailView):
