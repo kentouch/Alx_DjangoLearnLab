@@ -1,7 +1,7 @@
 # Extend Django’s UserCreationForm for the registration form to include additional fields like email.
 
 from django.contrib.auth.forms import UserCreationForm
-from django.forms import ModelForm
+from django import forms
 from django.contrib.auth.models import User
 from .models import Post
 from .models import Comment
@@ -12,7 +12,7 @@ class RegisterForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
 
 # Develop a form for the Post model using Django’s ModelForm 
-class PostForm(ModelForm):
+class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'content']
@@ -25,7 +25,7 @@ class PostForm(ModelForm):
         self.fields['author'].initial = self.request.user
 
 # Comment form for CRUD operations
-class CommentForm(ModelForm):
+class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['content']
