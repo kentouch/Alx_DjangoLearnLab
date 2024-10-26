@@ -1,9 +1,9 @@
 # Extend Django’s UserCreationForm for the registration form to include additional fields like email.
 
 from django.contrib.auth.forms import UserCreationForm
-from django import forms
+from django import forms  
 from django.contrib.auth.models import User
-from .models import Post
+from .models import Post, Tag
 from .models import Comment
 
 class RegisterForm(UserCreationForm):
@@ -11,11 +11,17 @@ class RegisterForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
-# Develop a form for the Post model using Django’s ModelForm 
+# Develop a form for the Post model using Django’s ModelForm and implementing tag field
 class PostForm(forms.ModelForm):
+    tags = forms.CharField(required=False)
+    # Implement a condition for creating new tags that do not already exist in the database
+    def tag(self):
+        tags = forms.CharField(required=False)
+        if tags not in Tag.objects.all():
+            Tag.objects.create(name=tags)
     class Meta:
         model = Post
-        fields = ['title', 'content']
+        fields = ['title', 'content', 'tags']
     
 
     # Ensure the form validates data properly and includes fields for title, content, 
