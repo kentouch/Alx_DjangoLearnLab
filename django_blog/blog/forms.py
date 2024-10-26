@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
 from django.contrib.auth.models import User
 from .models import Post
+from .models import Comment
 
 class RegisterForm(UserCreationForm):
     class Meta:
@@ -22,3 +23,9 @@ class PostForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['author'].initial = self.request.user
+
+# Comment form for CRUD operations
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']

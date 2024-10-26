@@ -53,9 +53,9 @@ class PostDetailView(DetailView):
     template_name = 'blog/post_detail.html' 
 
 # Create View to create a new blog post.
-@login_required
+#@login_required
 class PostCreateView(LoginRequiredMixin, CreateView):
-    login_url = '/login/'
+    #login_url = '/login/'
     model = Post
     template_name = 'blog/post_form.html'
     fields = ['title', 'content']
